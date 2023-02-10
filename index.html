@@ -18,8 +18,66 @@
       <div class="slides">
 	<!-- <section>Slide 1</section> -->
 	<!-- <section>Slide 2</section> -->
+	<section>
+	  <h1>The challenges of building a non-profit search engine</h1>
+<br>
+
+<h3>Daoud Clarke</h3>
+
+<br>
+PyData Cardiff - 20th February 2023
+	</section>
+	<section>
+	  <h3>Why do I have to see ads?</h3>
+	  <img src="img/ads.png">
+	</section>
+	<section>
+	  <h3>Why do I have to see a search results page?</h3>
+	  <img src="img/obs.png">
+	</section>
+	<section>
+	  <pre><code data-trim data-noescape class="stretch">
+app = FastAPI()
+
+
+@app.get("/complete")
+def complete(q: str):
+    response = requests.get(
+        COMPLETE_URL, params={'q': q, 'client': 'firefox'})
+    completions = response.json()[1]
+    all_urls, all_titles = perform_search(q)
+    completion = completions[0]
+    urls, titles = perform_search(completion)
+    all_urls += urls
+    all_titles += titles
+    return [q, all_titles]
+	  </code></pre>
+	</section>
+	<section>
+	  <h3>Why is it so slow?</h3>
+	</section>
+	<section>
+	  <h3>Version 0.0001</h3>
+	</section>
+	<section data-background-image="img/larry-page.png">
+	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
+	</section>
+	
 	<section data-markdown data-separator="^\n\n">
 	  <textarea data-template>
+	    
+# The challenges of building a non-profit search engine
+<br>
+
+### Daoud Clarke
+
+<br>
+PyData Cardiff - 20th February 2023
+
+
+### Why should the gateway to the world's knowledge be in the hands of a corporation?
+
+
 # Introduction
  - Brief overview of the challenges of building a non-profit search engine
  - Introduction to MWMBL, an open-source, non-profit search engine built from scratch
