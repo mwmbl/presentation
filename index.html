@@ -46,10 +46,20 @@ def perform_search(query):
         SEARCH_URL,
         params={'q': query, 'client': AGENT})
 
-    with open('content.html', 'wb') as output_file:
-        output_file.write(response.content)
-
     urls, titles = process_search_results(response.content)
+    return urls, titles
+
+
+def process_search_results(html_content):
+    soup = BeautifulSoup(html_content, features="html.parser")
+    headlines = soup.select('h3')
+    urls = []
+    for headline in headlines:
+        link = headline.parent
+        url = link.get('href')
+        urls.append(url)
+    titles = [span.get_text() for span in headlines]
+    assert len(urls) == len(titles)
     return urls, titles
 	  </code></pre>
 	</section>
@@ -80,7 +90,52 @@ def complete(q: str):
 	  <h3>Why is it so slow?</h3>
 	</section>
 	<section>
-	  <h3>Version 0.0001</h3>
+	  <h3>Attempt 1: SQLite</h3>
+	</section>
+	<section>
+	  <pre><code data-trim data-noescape class="stretch">
+@app.get("/complete")
+def complete(q: str):
+    terms = [x.lower() for x in q.split()]
+
+    completed = complete_term(terms[-1])
+    terms = terms[:-1] + [completed]
+
+    con = sqlite3.connect(INDEX_PATH)
+    in_part = ','.join('?'*len(terms))
+    query = f"""
+        SELECT title, url
+        FROM terms INNER JOIN pages
+        ON terms.page_id = pages.id
+        WHERE term IN ({in_part})
+        GROUP BY title, url
+        ORDER BY count(*) DESC, length(title)
+        LIMIT 5
+    """
+
+    data = con.execute(query, terms).fetchall()
+
+    results = [title.replace("\n", "") + ' — ' +
+               url.replace("\n", "") for title, url in data]
+    if len(results) == 0:
+        return []
+    return [q, results]
+	  </code></pre>
+	</section>
+
+	<section>
+	  <img class="stretch" src="img/latency-1.png">
+	</section>
+	<section>
+	  <img class="stretch" src="img/latency-2.png">
+	</section>
+	<section>
+	  <img class="stretch" src="img/latency-3.png">
+	</section>
+	<section>
+	  <img class="stretch" src="img/latency-4.png">
+	</section>
+	  
 	</section>
 	<section data-background-image="img/larry-page.png">
 	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
