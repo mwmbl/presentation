@@ -28,12 +28,25 @@
 PyData Cardiff - 20th February 2023
 	</section>
 	<section>
+	  <img class="stretch" src="img/daoud.jpg">
+	</section>
+	<section>
+	  <img class="stretch" src="img/google-interview.png">
+	</section>
+	<section>
+	  <img class="stretch" src="img/bing-interview.png">
+	</section>
+	<section>
 	  <h3>Why do I have to see ads?</h3>
 	  <img src="img/ads.png">
 	</section>
 	<section>
 	  <h3>Why do I have to see a search results page?</h3>
 	  <img src="img/obs.png">
+	</section>
+	<section>
+	  <h1>December 2020</h1>
+	  <h3>Stoatally Different</h3>
 	</section>
 	<section>
 	  <pre><code data-trim data-noescape class="stretch">
@@ -135,10 +148,31 @@ def complete(q: str):
 	<section>
 	  <img class="stretch" src="img/latency-4.png">
 	</section>
-	  
+	<section>
+	  <h3>What's the worst case number of reads?</h3>
+	  <pre><code data-trim data-noescape class="stretch">
+        SELECT title, url
+        FROM terms INNER JOIN pages
+        ON terms.page_id = pages.id
+        WHERE term IN ({in_part})
+        GROUP BY title, url
+        ORDER BY count(*) DESC, length(title)
+        LIMIT 5
+	  </code></pre>
+	</section>
+
+
+	
 	</section>
 	<section data-background-image="img/larry-page.png">
 	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
+	</section>
+
+	<section>
+	  <h3>How to fly/build a search engine</h3>
+	  Do not listen to what anybody says to you at this point because they are unlikely to say anything helpful. They are most likely to say something along the lines of "Good God, you can't possibly be flying!"
+	  <br><br>
+	  <span style="color: red">It is vitally important not to believe them or they will suddenly be right. </span>
 	</section>
 	
 	<section data-markdown data-separator="^\n\n">
