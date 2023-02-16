@@ -118,8 +118,8 @@ def complete(q: str):
     in_part = ','.join('?'*len(terms))
     query = f"""
         SELECT title, url
-        FROM terms INNER JOIN pages
-        ON terms.page_id = pages.id
+        FROM terms INNER JOIN documents
+        ON terms.document_id = documents.id
         WHERE term IN ({in_part})
         GROUP BY title, url
         ORDER BY count(*) DESC, length(title)
@@ -152,18 +152,36 @@ def complete(q: str):
 	  <h3>What's the worst case number of reads?</h3>
 	  <pre><code data-trim data-noescape class="stretch">
         SELECT title, url
-        FROM terms INNER JOIN pages
-        ON terms.page_id = pages.id
+        FROM terms INNER JOIN documents
+        ON terms.document_id = documents.id
         WHERE term IN ({in_part})
         GROUP BY title, url
         ORDER BY count(*) DESC, length(title)
         LIMIT 5
 	  </code></pre>
+	  <span>assume <b>n</b> terms in the query and <b>d</b> documents per term</span>
 	</section>
 
+	<section>
+	  <h3>We need a new architecture</h3>
+	</section>
 
+	<section data-background-size="contain" data-background-image="img/tiny-storage.svg" data-background-color="white"></section>
 	
+	<section data-auto-animate data-background-color="rgb(200, 200, 200)">
+	  <!-- <svg data-src="img/tiny-storage.svg"></svg> -->
+	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="transform: scale(1);"> -->
+	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="scale: 1;"> -->
+	  <img data-id="d1" src="img/tiny-storage.svg" width="50%">
 	</section>
+
+	<section data-auto-animate data-background-color="rgb(200, 200, 200)">
+	  <!-- <svg data-src="img/tiny-storage.svg"></svg> -->
+	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="transform: scale(2);"> -->
+	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="scale: 2;"> -->
+	  <img data-id="d1" src="img/tiny-storage.svg" width="100%">
+	</section>
+
 	<section data-background-image="img/larry-page.png">
 	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
 	</section>
