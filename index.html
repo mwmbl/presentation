@@ -167,87 +167,48 @@ def complete(q: str):
 	</section>
 
 	<section data-background-size="contain" data-background-image="img/tiny-storage.svg" data-background-color="white"></section>
+
+	<section>
+	  <pre><code data-trim data-noescape class="stretch">
+def get_key_page_index(self, key) -> int:
+    key_hash = mmh3.hash(key, signed=False)
+    return key_hash % self.num_pages
+	  </code></pre>
+	  <span>"apple" => 1680</span>
+	</section>
+
+	<section>
+	  <pre><code data-trim data-noescape class="stretch">
+def _get_page_tuples(self, i):
+    page_data = self.mmap[
+        i * self.page_size +
+        METADATA_SIZE:(i + 1) * self.page_size
+        + METADATA_SIZE]
+    try:
+        decompressed_data = self.decompressor.decompress(
+            page_data)
+    except ZstdError:
+        logger.exception(f"Error decompressing: {page_data}")
+        return []
+    return json.loads(decompressed_data.decode('utf8'))
+	  </code></pre>
+	</section>
+
+	<section data-background-size="contain" data-background-image="img/page.png" data-background-color="#300a24"></section>
+	<section data-background-size="contain" data-background-image="img/page-2.png" data-background-color="#300a24"></section>
+
 	
-	<section data-auto-animate data-background-color="rgb(200, 200, 200)">
-	  <!-- <svg data-src="img/tiny-storage.svg"></svg> -->
-	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="transform: scale(1);"> -->
-	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="scale: 1;"> -->
-	  <img data-id="d1" src="img/tiny-storage.svg" width="50%">
-	</section>
-
-	<section data-auto-animate data-background-color="rgb(200, 200, 200)">
-	  <!-- <svg data-src="img/tiny-storage.svg"></svg> -->
-	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="transform: scale(2);"> -->
-	  <!-- <img data-id="d1" src="img/tiny-storage.svg" style="scale: 2;"> -->
-	  <img data-id="d1" src="img/tiny-storage.svg" width="100%">
-	</section>
-
 	<section data-background-image="img/larry-page.png">
 	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
 	</section>
 
 	<section>
-	  <h3>How to fly/build a search engine</h3>
+	  <h3>How to fly (or build a search engine)</h3>
 	  Do not listen to what anybody says to you at this point because they are unlikely to say anything helpful. They are most likely to say something along the lines of "Good God, you can't possibly be flying!"
 	  <br><br>
 	  <span style="color: red">It is vitally important not to believe them or they will suddenly be right. </span>
 	</section>
 	
-	<section data-markdown data-separator="^\n\n">
-	  <textarea data-template>
-	    
-# The challenges of building a non-profit search engine
-<br>
-
-### Daoud Clarke
-
-<br>
-PyData Cardiff - 20th February 2023
-
-
-### Why should the gateway to the world's knowledge be in the hands of a corporation?
-
-
-# Introduction
- - Brief overview of the challenges of building a non-profit search engine
- - Introduction to MWMBL, an open-source, non-profit search engine built from scratch
- - Overview of the talk's content and its objectives
-
-
-### Designing an Efficient Search Engine Index
- -   Explanation of the specially designed index based on pages of memory
- -   Discussion of the benefits of storing search results in compressed pages of 4096 bytes
- -   Overview of how the search engine is effectively one large hash map built around these compressed pages
- -   Discussion of how cost-effectiveness is achieved through reduced storage space requirements
- -   Explanation of other tricks used, such as discarding unnecessary data and only storing the most important search results
- -   Discussion of how this allows the storage of billions of search results on a single machine
-
-
-# Designing a Distributed Crawler
-
- -  Explanation of how the crawler is distributed via a Firefox extension run by volunteers
- -  Discussion of how the crawler retrieves a set of URLs to crawl from a central server
- -  Overview of the process of retrieving and processing the URLs
- -  Explanation of how the results are batched up and sent back to the central server
- -  Discussion of the benefits of a distributed crawling approach
-
-
-# Starting an Open Source Project and Community
-
- - Discussion of what it's like starting an open source project from scratch
- - Explanation of the challenges and benefits of building a community around the project
- - Overview of the importance of collaboration and community in open source projects
- - Discussion of how the success of MWMBL is driven by the community of volunteers and contributors
-
-
-# Conclusion
-
- - Summary of the technical design of the index and crawler
- - Discussion of the achievements and challenges of building a non-profit search engine
- - Final thoughts on the future of MWMBL and the impact it will have
- - Q&A session for audience members to ask questions.
-	  </textarea>
-	</section>
       </div>
     </div>
 
