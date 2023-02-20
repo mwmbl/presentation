@@ -159,11 +159,14 @@ def complete(q: str):
         ORDER BY count(*) DESC, length(title)
         LIMIT 5
 	  </code></pre>
-	  <span>assume <b>n</b> terms in the query and <b>d</b> documents per term</span>
 	</section>
 
 	<section>
 	  <h3>We need a new architecture</h3>
+	</section>
+
+	<section>
+	  <img class="stretch" src="img/page-def.png">
 	</section>
 
 	<section data-background-size="contain" data-background-image="img/tiny-storage.svg" data-background-color="white"></section>
@@ -197,16 +200,81 @@ def _get_page_tuples(self, i):
 	<section data-background-size="contain" data-background-image="img/page.png" data-background-color="#300a24"></section>
 	<section data-background-size="contain" data-background-image="img/page-2.png" data-background-color="#300a24"></section>
 
-	
-	<section data-background-image="img/larry-page.png">
-	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
+	<section>
+	  <ul>
+	    <li> Query: "open broadcaster software"
+	    <li> Look up:
+	      <ul>
+		<li> open
+		<li> broadcaster
+		<li> software
+		<li> open broadcaster
+		<li> broadcaster software
+	      </ul>
+	  </ul>
 	</section>
 
 	<section>
+	  <h3>What is the maximum number of reads?</h3>
+	</section>
+
+	<section>
+	  <h3>Will it work?</h3>
+	</section>
+
+	<section>
+	  <ul>
+	    <li> We fit around 23 results in one page of 4096 bytes
+	    <li> Google indexes around 100 billion pages per locale
+	    <li> We would need an index of around 16 terabytes
+	  </ul>
+	</section>	
+
+	<section>
+	  <h3>How can we reduce crawling costs?</h3>
+	</section>
+
+	<section>
+	  <pre><code data-trim data-noescape class="stretch">
+@router.post('/batches/new')
+def request_new_batch(batch_request: NewBatchRequest) \
+    -> list[str]:
+    ...
+
+@router.post('/batches/')
+def post_batch(batch: Batch):
+    ...
+	  </code></pre>
+	</section>
+	
+	<section>
+	  <h3>Will it work?</h3>
+	</section>
+
+	<section>
+	  <ul>
+	    <li> We are currently crawling around 1 million pages a day
+	    <li> We currently have about 26 active volunteers
+	    <li> We want our index of 100 billion pages to be refreshed at least once a month
+	    <li> We need to crawl around 3 billion pages a day
+	  </ul>
+	</section>	
+
+	<section>
+	  <h3>But will it work?</h3>
+	</section>
+	
+	<section>
 	  <h3>How to fly (or build a search engine)</h3>
-	  Do not listen to what anybody says to you at this point because they are unlikely to say anything helpful. They are most likely to say something along the lines of "Good God, you can't possibly be flying!"
+	  <i style="font-style: italic !important">Do not listen to what anybody says to you at this point because they are unlikely to say anything helpful. They are most likely to say something along the lines of "Good God, you can't possibly be flying!"</i>
 	  <br><br>
-	  <span style="color: red">It is vitally important not to believe them or they will suddenly be right. </span>
+	  <span style="color: red"><i style="font-style: italic !important">It is vitally important not to believe them or they will suddenly be right.</i> </span>
+	  <br><br>
+	  - Douglas Adams
+	</section>
+	
+	<section data-background-image="img/larry-page.png">
+	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
 	</section>
 	
       </div>
