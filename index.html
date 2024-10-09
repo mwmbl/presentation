@@ -28,11 +28,41 @@
 OSSym24 - 10th October 2024
 	</section>
 
+	<section data-background-size="contain" data-background-image="img/alpha-mwmbl.png" data-background-color="white">
+	  <a href="https://alpha.mwmbl.org">
+	    <h3><br><br><br><br><br>Demo</h3>
+	  </a>
+
+	</section>
+
 	<section>
 	  <img class="stretch" src="img/finances.png">
 	</section>
 	<section>
 	  <h3>Part 1: technology</h3>
+	</section>
+	
+	<section>
+	  <ul>
+	    <li> 500 million pages indexed
+	    <li> 4TB index size
+	    <li> Over 4,000 registered users
+	    <li> Over 33,000 user curations
+	  </ul>
+	</section>
+
+	<section>
+	  <h3>Crawling</h3>
+	</section>
+
+	<section data-background-size="contain" data-background-image="img/crawler-script.png" data-background-color="white"></section>
+
+	<section>
+	  <img class="stretch" src="img/firefox-plugin.png">
+	</section>	
+
+	<section>
+	  <h3>Indexing and searching</h3>
 	</section>
 
 	<section>
@@ -60,6 +90,14 @@ OSSym24 - 10th October 2024
 	</section>
 
 	<section data-background-size="contain" data-background-image="img/tiny-storage.svg" data-background-color="white"></section>
+	
+	<section>
+	  <ul>
+	    <li> We fit around 23 results in one page of 4096 bytes
+	    <li> Google indexes around 100 billion pages per locale
+	    <li> We would need an index of around 16TB
+	  </ul>
+	</section>	
 
 	<section>
 	  <h3>Part 2: community</h3>
@@ -72,96 +110,6 @@ OSSym24 - 10th October 2024
 	  <img class="stretch" src="img/contributions.png">
 	</section>
 
-	
-	<section>
-	  <pre><code data-trim data-noescape class="stretch">
-def get_key_page_index(self, key) -> int:
-    key_hash = mmh3.hash(key, signed=False)
-    return key_hash % self.num_pages
-	  </code></pre>
-	  <span>"apple" => 1680</span>
-	</section>
-
-	<section>
-	  <pre><code data-trim data-noescape class="stretch">
-def _get_page_tuples(self, i):
-    page_data = self.mmap[
-        i * self.page_size +
-        METADATA_SIZE:(i + 1) * self.page_size
-        + METADATA_SIZE]
-    try:
-        decompressed_data = self.decompressor.decompress(
-            page_data)
-    except ZstdError:
-        logger.exception(f"Error decompressing: {page_data}")
-        return []
-    return json.loads(decompressed_data.decode('utf8'))
-	  </code></pre>
-	</section>
-
-	<section data-background-size="contain" data-background-image="img/page.png" data-background-color="#300a24"></section>
-	<section data-background-size="contain" data-background-image="img/page-2.png" data-background-color="#300a24"></section>
-
-	<section>
-	  <ul>
-	    <li> Query: "open broadcaster software"
-	    <li> Look up:
-	      <ul>
-		<li> open
-		<li> broadcaster
-		<li> software
-		<li> open broadcaster
-		<li> broadcaster software
-	      </ul>
-	  </ul>
-	</section>
-
-	<section>
-	  <h3>What is the maximum number of reads?</h3>
-	</section>
-
-	<section>
-	  <h3>Will it work?</h3>
-	</section>
-
-	<section>
-	  <ul>
-	    <li> We fit around 23 results in one page of 4096 bytes
-	    <li> Google indexes around 100 billion pages per locale
-	    <li> We would need an index of around 16 terabytes
-	  </ul>
-	</section>	
-
-	<section>
-	  <h3>How can we reduce crawling costs?</h3>
-	</section>
-
-	<section>
-	  <pre><code data-trim data-noescape class="stretch">
-@router.post('/batches/new')
-def request_new_batch(batch_request: NewBatchRequest) \
-    -> list[str]:
-    ...
-
-@router.post('/batches/')
-def post_batch(batch: Batch):
-    ...
-	  </code></pre>
-	</section>
-	
-	<section>
-	  <h3>Will it work?</h3>
-	</section>
-
-	<section>
-	  <ul>
-	    <li> We are currently crawling around 1 million pages a day
-	    <li> We currently have about 26 active volunteers
-	    <li> We want our index of 100 billion pages to be refreshed at least once a month
-	    <li> We need to crawl around 3 billion pages a day
-	  </ul>
-	</section>	
-
 	<section>
 	  <h3>But will it work?</h3>
 	</section>
@@ -173,10 +121,6 @@ def post_batch(batch: Batch):
 	  <span style="color: red"><i style="font-style: italic !important">It is vitally important not to believe them or they will suddenly be right.</i> </span>
 	  <br><br>
 	  - Douglas Adams
-	</section>
-	
-	<section data-background-image="img/larry-page.png">
-	  <h3>Why should the gateway to the world's knowledge be in the hands of a corporation?</h3>
 	</section>
 	
       </div>
